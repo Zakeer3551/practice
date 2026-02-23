@@ -1,7 +1,7 @@
 variable "instances" {
 
-    default = ["mongodb", "redis"]
-  
+  default = ["mongodb", "redis"]
+
 }
 
 variable "domain_name" {
