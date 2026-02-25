@@ -1,5 +1,5 @@
 variable "instances" {
 
-    default = ["mongodb", "redis"]
-  
+  default = ["mongodb", "redis"]
+
 }

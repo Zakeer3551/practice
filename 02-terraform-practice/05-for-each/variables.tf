@@ -8,7 +8,7 @@ variable "instances" {
 
   default = {
     mongodb = "t3.micro",
-    redis = "t3.small"
+    redis   = "t3.small"
   } # # this is example for for_each particularly for tomap type
 }
 

@@ -14,7 +14,7 @@
 
 resource "aws_instance" "roboshop" {
   ami                    = "ami-0220d79f3f480ecf5"
-  for_each = tomap(var.instances) # this is example for for_each particularly for tomap type (map type)
+  for_each               = tomap(var.instances) # this is example for for_each particularly for tomap type (map type)
   instance_type          = each.value
   vpc_security_group_ids = [aws_security_group.allow-all.id]
 
