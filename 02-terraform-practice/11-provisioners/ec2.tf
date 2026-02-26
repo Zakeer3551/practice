@@ -3,31 +3,31 @@ resource "aws_instance" "example" {
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
 
-provisioner "local-exec" {
-    command = "echo ${self.private_ip} > inventory.ini" 
+  provisioner "local-exec" {
+    command = "echo ${self.private_ip} > inventory.ini"
   }
 
-provisioner "local-exec" {
-    command = "pwdd"
-    on_failure = continue
+  provisioner "local-exec" {
+    command    = "pwdd"
+    on_failure = continue # the above command is incorrect, this on_failure allows to move forward or else terraform will exit here.
   }
 
-provisioner "local-exec" {
+  provisioner "local-exec" {
     when    = destroy
     command = "echo 'Deleting the instance'"
   }
 
-connection {
+  connection {
     type     = "ssh"
     user     = "ec2-user"
     password = "DevOps321"
     host     = self.public_ip
   }
 
-provisioner "remote-exec" {
+  provisioner "remote-exec" {
     inline = [
-        "sudo dnf install nginx -y",
-        "sudo systemctl start nginx" 
+      "sudo dnf install nginx -y",
+      "sudo systemctl start nginx"
     ]
   }
 
